@@ -1,0 +1,70 @@
+EXP:
+    ID: coco
+    OUTPUT_DIR: data_coco_RIB
+
+DATASET:
+    NAME: coco
+    ROOT: /workspace/coco
+    LABELS: ./data/datasets/coco/labels.txt
+    N_CLASSES: 81
+    IGNORE_LABEL: 255
+    SCALES: [0.5, 0.75, 1.0, 1.25, 1.5]
+    SPLIT:
+        TRAIN: train_2014
+        VAL: val_2014
+        TEST: test
+
+DATALOADER:
+    NUM_WORKERS: 0
+
+IMAGE:
+    MEAN:
+        R: 122.675
+        G: 116.669
+        B: 104.008
+    SIZE:
+        BASE: # None
+        TRAIN: 481
+        TEST: 513
+
+MODEL:
+    NAME: DeepLabV2_ResNet101_MSC
+    N_BLOCKS: [3, 4, 23, 3]
+    ATROUS_RATES: [6,12,18,24]
+    INIT_MODEL: data/models/coco/deeplabv1_resnet101/caffemodel/deeplabv1_resnet101-imagenet.pth
+
+
+SOLVER:
+    BATCH_SIZE:
+        TRAIN: 10
+        TEST: 1
+    ITER_MAX: 100000
+    ITER_SIZE: 1
+    ITER_SAVE: 20000
+    ITER_TB: 20
+    LR_DECAY: 10
+    LR: 2.5e-4
+    MOMENTUM: 0.9
+    OPTIMIZER: sgd
+    POLY_POWER: 0.9
+    WEIGHT_DECAY: 5.0e-4
+    AVERAGE_LOSS: 20
+
+CRF:
+    ITER_MAX: 10
+    POS_W: 3
+    POS_XY_STD: 1
+    BI_W: 4
+    BI_XY_STD: 67
+    BI_RGB_STD: 3
+
+THRESHOLDS:
+    MAIN_TH: 0.9
+    AUX_TH: 0.9
+    AFF_LOSS_WEIGHT: 0.4
+    LOSS_WEIGHT_1ST: 0.2
+    LOSS_WEIGHT_2ND: 0.2
+    LOSS_WEIGHT_3RD: 0.2
+    START_RATION: 0.1
+    IMAGENET_INIT: True
+    SCALES: [0.5, 0.75, 1.25, 1.5] # if out-of-memory, remove 1.75 or 2.0 or both of them
