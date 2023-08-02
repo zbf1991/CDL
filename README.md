@@ -59,40 +59,35 @@ ImageNet-pretrain-resnet101 init weights can be download in this [link](https://
 
 ## Training & Evaluation
 
-To train DeepLab v2 on PASCAL VOC 2012 with CDL-b and coco init weights:
+To train DeepLab v2 on PASCAL VOC 2012 with CDL-b/e and coco init weights:
 
 ```sh
-python main_CDL_b.py train \
+python main_CDL_b/e.py train \
     --config-path configs/voc12_coco_pretrain.yaml
 ```
 
-To train DeepLab v2 on PASCAL VOC 2012 with CDL-e and coco init weights:
+
+To train DeepLab v2 on PASCAL VOC 2012 with CDL-b/e and imagenet init weights:
 
 ```sh
-python main_CDL_e.py train \
-    --config-path configs/voc12_coco_pretrain.yaml
-```
-
-To train DeepLab v2 on PASCAL VOC 2012 with CDL-b and imagenet init weights:
-
-```sh
-python main_CDL_b.py train \
-    --config-path configs/voc12_imageNet_pretrain.yaml
-```
-
-To train DeepLab v2 on PASCAL VOC 2012 with CDL-e and imagenet init weights:
-
-```sh
-python main_CDL_e.py train \
+python main_CDL_b/e.py train \
     --config-path configs/voc12_imageNet_pretrain.yaml
 ```
 
 
 
-To evaluate the performance on a validation set with CDL-e:
+To train DeepLab v2 on MS COCO with CDL-b/e and imagenet init weights:
 
 ```sh
-python main_CDL_b.py test \
+python main_CDL_b/e.py train \
+    --config-path configs/coco.yaml
+
+```
+
+To evaluate the performance on a validation set with CDL-b/e:
+
+```sh
+python main_CDL_b/e.py test \
     --config-path configs/voc12_coco_pretrain.yaml \
     --model-path data/models/voc12/deeplabv2_resnet101_msc/train_aug/checkpoint_final.pth
 ```
@@ -102,7 +97,7 @@ Note: This command saves the predicted logit maps (`.npy`) and the scores (`.jso
 To re-evaluate with a CRF post-processing:<br>
 
 ```sh
-python main_CDL_b.py crf \
+python main_CDL_b/e.py crf \
     --config-path configs/voc12_coco_pretrain.yaml
 ```
 
