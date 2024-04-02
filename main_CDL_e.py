@@ -574,7 +574,7 @@ def crf(config_path, n_jobs):
 
     # Process per sample
     def process(i):
-        image_id, image, gt_label = dataset.__getitem__(i)
+        image_id, image, gt_label, image_aug = dataset.__getitem__(i)
 
         filename = os.path.join(logit_dir, image_id + ".npy")
         logit = np.load(filename)
