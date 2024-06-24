@@ -67,5 +67,5 @@ THRESHOLDS:
     LOSS_WEIGHT_3RD: 0.2
     START_RATION: 0.1
     IMAGENET_INIT: False
-    SCALES: [0.5] #[0.5, 0.75]
+    SCALES: [0.5, 0.75]
 
